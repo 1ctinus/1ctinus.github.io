@@ -20,15 +20,6 @@ html {
     background-color: #ddd190
 }
 
-h1 {
-    text-align: center;
-    font-family: inter;
-    color: #fff;
-    font-size: 50px;
-    margin: -8px;
-    text-shadow: 2px 2px #7e5d32
-}
-
 div {
     display: flex;
     justify-content: center;
@@ -36,7 +27,7 @@ div {
 }
 
 textarea {
-    width: 65%;
+    width: 100%;
     display: block;
     margin: 0 auto;
     /* overflow: visible; */
@@ -49,7 +40,8 @@ textarea {
     padding-left: 80px;
     box-shadow: 10px 10px #7e5d32;
     box-sizing: border-box;
-    font-family: Pangolin
+    font-family: Pangolin;
+height: calc(100vh - 60px);
 }
 
 input:focus, select:focus, textarea:focus {
@@ -67,11 +59,11 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #b97900;
-    width: 65%;
+    background-color: #26CCFF;
+    width: 100%;
     display: block;
     margin: 0 auto;
-    box-shadow: 10px 10px #7e5d32
+    height: 60px;
 }
 
 li {
@@ -88,7 +80,7 @@ li a, li label {
     cursor: pointer;
     font-family: icon, inter;
     font-size: 30px;
-    text-shadow: 2px 2px #7e5d32
+    text-shadow: 2px 2px #325d7e
 }
 
 li a:hover, li label:hover {
@@ -97,4 +89,7 @@ li a:hover, li label:hover {
 
 #file {
     display: none
+}
+body {
+margin: 0px
 }

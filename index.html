@@ -14,7 +14,6 @@
  <link rel="manifest" href="manifest.webmanifest">
    </head>
    <body>
-      <h1 id="title">JNOTE 0.2.1</h1>
       <ul>
          <li><a class="active" id="btnSave" title="Save">󰆓</a></li>
          <li><a onclick="document.querySelector(&quot;textarea&quot;).value = &quot;&quot;" title="Clear">󰃢</a></li>
@@ -22,9 +21,75 @@
          <li><label class="custom-file-input" for="file" title="Select File">󰩎</label><input type="file" id="file"/></li>
          <li><a onclick="copyToClipboard()" title="Copy To Clipboard">󰅌</a></li>
       </ul>
-      <textarea id="text" rows="30" style="height:1em;" spellcheck="true"></textarea>
+      <textarea id="text" style="height:1em;" spellcheck="true"></textarea>
 <script>
-const downloadToFile=(e,t,n)=>{const o=document.createElement("a"),a=new Blob([e],{type:n});o.href=URL.createObjectURL(a),o.download=t,o.click(),URL.revokeObjectURL(o.href)};var observe;document.querySelector("#btnSave").addEventListener("click",(()=>{const e=document.querySelector("textarea");downloadToFile(e.value,"note.txt","text/plain")})),observe=window.attachEvent?function(e,t,n){e.attachEvent("on"+t,n)}:function(e,t,n){e.addEventListener(t,n,!1)};var text=document.getElementById("text");function resize(){text.style.height="auto",text.style.height=text.scrollHeight+"px"}function delayedResize(){window.setTimeout(resize,0)}if(observe(text,"change",resize),observe(text,"cut",delayedResize),observe(text,"paste",delayedResize),observe(text,"drop",delayedResize),observe(text,"keydown",delayedResize),text.focus(),text.select(),resize(),window.localStorage){const e=document.getElementById("text");e.value=localStorage.value||"",e.addEventListener("input",(function(){localStorage.setItem("value",e.value),"camel"==e.value?(document.body.style.backgroundImage="url(https://upload.wikimedia.org/wikipedia/commons/c/c0/Wild_Bactrian_camel_on_road_east_of_Yarkand.jpg)",e.value="Happy Hump Day!"):document.body.style.backgroundImage="none"}))}function toggleSpellCheck(){const e=document.getElementById("text").getAttribute("spellcheck");document.getElementById("text").setAttribute("spellcheck","false"==e?"true":"false")}const inputElement=document.getElementById("file");function handleFiles(){const e=document.getElementById("file").files[0];if(e){var t=new FileReader;t.readAsText(e,"UTF-8"),t.onload=function(e){document.querySelector("textarea").value=e.target.result},t.onerror=function(e){document.querySelector("textarea").value="error reading file"}}}function copyToClipboard(){var e=document.getElementById("text");e.select(),e.setSelectionRange(0,99999),document.execCommand("copy")}inputElement.addEventListener("change",handleFiles,!1);
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => {
+        console.log('yay', reg)
+      }).catch(err => {
+        console.log('gosh darn it!')
+      })
+  })
+}
+const downloadToFile = (content, filename, contentType) => {
+  const a = document.createElement("a")
+  const file = new Blob([content], { type: contentType })
+
+  a.href = URL.createObjectURL(file)
+  a.download = filename
+  a.click()
+
+  URL.revokeObjectURL(a.href)
+}
+document.querySelector("#btnSave").addEventListener("click", () => {
+  const textArea = document.querySelector("textarea")
+
+  downloadToFile(textArea.value, "note.txt", "text/plain")
+})
+var observe = function (element, event, handler) {
+    element.addEventListener(event, handler, false)
+}
+var text = document.getElementById("text")
+  text.style.height = "auto"
+  text.style.height = Math.max(text.scrollHeight, window.innerHeight - 60)+"px"
+if (window.localStorage) {
+  const input = document.getElementById("text")
+  input.value = localStorage.value || ""
+  input.addEventListener("input", function () {
+    localStorage.setItem("value", input.value)
+  text.style.height = "auto"
+  text.style.height = Math.max(text.scrollHeight, window.innerHeight - 60)+"px"
+  }
+  )
+}
+function toggleSpellCheck() {
+  const value = document.getElementById("text").getAttribute("spellcheck")
+  document.getElementById("text").setAttribute("spellcheck", value == "false" ? "true" : "false")
+}
+const inputElement = document.getElementById("file")
+inputElement.addEventListener("change", handleFiles, false)
+function handleFiles() {
+  // const fileList = this.files
+  const file = document.getElementById("file").files[0]
+  if (file) {
+    var reader = new FileReader()
+    reader.readAsText(file, "UTF-8")
+    reader.onload = function (evt) {
+      document.querySelector("textarea").value = evt.target.result
+    }
+    reader.onerror = function (evt) {
+      document.querySelector("textarea").value = "error reading file"
+    }
+  }
+}
+function copyToClipboard() {
+  var copyText = document.getElementById("text")
+  copyText.select()
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy")
+}
 </script>
    </body>
 </html>
