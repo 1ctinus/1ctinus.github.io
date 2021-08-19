@@ -16,13 +16,16 @@
    <body>
       <ul>
          <li><a class="active" id="btnSave" title="Save">󰆓</a></li>
-         <li><a onclick="document.querySelector(&quot;textarea&quot;).value = &quot;&quot;" title="Clear">󰃢</a></li>
+         <li><a onclick="document.querySelector(&quot;#text&quot;).value = &quot;&quot;" title="Clear">󰃢</a></li>
          <li><a onclick="toggleSpellCheck()" title="Toggle Spellcheck">󰓆</a></li>
          <li><label class="custom-file-input" for="file" title="Select File">󰩎</label><input type="file" id="file"/></li>
          <li><a onclick="copyToClipboard()" title="Copy To Clipboard">󰅌</a></li>
+	 <li><a onclick="alert(`JNOTE v.${ver}\nWritten By James\nLicensed Under GPLv3`)" title="Software info">󰋽</a></li>
       </ul>
+      <input id="title" spellcheck="true"></textarea>
       <textarea id="text" style="height:1em;" spellcheck="true"></textarea>
 <script>
+const ver = "0.4"
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
@@ -44,23 +47,23 @@ const downloadToFile = (content, filename, contentType) => {
   URL.revokeObjectURL(a.href)
 }
 document.querySelector("#btnSave").addEventListener("click", () => {
-  const textArea = document.querySelector("textarea")
+  const textArea = document.querySelector("title")
 
-  downloadToFile(textArea.value, "note.txt", "text/plain")
+  downloadToFile(textArea.value, (document.querySelector("#title").value|| "note") + ".txt", "text/plain")
 })
 var observe = function (element, event, handler) {
     element.addEventListener(event, handler, false)
 }
 var text = document.getElementById("text")
   text.style.height = "auto"
-  text.style.height = Math.max(text.scrollHeight, window.innerHeight - 60)+"px"
+  text.style.height = Math.max(text.scrollHeight, window.innerHeight - 108)+"px"
 if (window.localStorage) {
   const input = document.getElementById("text")
   input.value = localStorage.value || ""
   input.addEventListener("input", function () {
     localStorage.setItem("value", input.value)
   text.style.height = "auto"
-  text.style.height = Math.max(text.scrollHeight, window.innerHeight - 60)+"px"
+  text.style.height = Math.max(text.scrollHeight, window.innerHeight - 108)+"px"
   }
   )
 }
@@ -77,10 +80,10 @@ function handleFiles() {
     var reader = new FileReader()
     reader.readAsText(file, "UTF-8")
     reader.onload = function (evt) {
-      document.querySelector("textarea").value = evt.target.result
+      document.querySelector("#text").value = evt.target.result
     }
     reader.onerror = function (evt) {
-      document.querySelector("textarea").value = "error reading file"
+      document.querySelector("#text").value = "error reading file"
     }
   }
 }
