@@ -47,7 +47,7 @@ const downloadToFile = (content, filename, contentType) => {
   URL.revokeObjectURL(a.href)
 }
 document.querySelector("#btnSave").addEventListener("click", () => {
-  const textArea = document.querySelector("title")
+  const textArea = document.querySelector("#text")
 
   downloadToFile(textArea.value, (document.querySelector("#title").value|| "note") + ".txt", "text/plain")
 })
