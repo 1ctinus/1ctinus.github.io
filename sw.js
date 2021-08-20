@@ -6,7 +6,6 @@ const resourcesToPrecache = [
 '/notepad-left.png',
 '/notepad-top.png',
 '/line.png',
-'/notepad.js'
 ]
 self.addEventListener('install', event => {
   console.log('Install event!')
