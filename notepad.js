@@ -1,41 +1,62 @@
+let fileHandle;
+var isChromium = !!window.chrome;
+async function bleedingInput() {
+  [fileHandle] = await window.showOpenFilePicker();
+  const file = await fileHandle.getFile();
+  const contents = await file.text();
+  document.querySelector("#text").value = contents;
+}
+async function bleedingOutput() {
+  const writable = await fileHandle.createWritable();
+  // Write the contents of the file to the stream.
+  await writable.write(contents);
+  // Close the file and write the contents to disk.
+  await writable.close();
+
+
+}
 const downloadToFile = (content, filename, contentType) => {
-    const a = document.createElement("a")
-    const file = new Blob([content], { type: contentType })
-  
-    a.href = URL.createObjectURL(file)
-    a.download = filename
-    a.click()
-  
-    URL.revokeObjectURL(a.href)
+  if (typeof fileHandle == 'undefined') {
+  const a = document.createElement("a")
+  const file = new Blob([content], { type: contentType })
+
+  a.href = URL.createObjectURL(file)
+  a.download = filename
+  a.click()
+
+  URL.revokeObjectURL(a.href)
+  } else 
+  {
+    bleedingOutput();
   }
-  document.querySelector("#btnSave").addEventListener("click", () => {
-    const textArea = document.querySelector("#text")
-  
-    downloadToFile(textArea.value, (document.querySelector("#title").value|| "note") + ".txt", "text/plain")
-  })
-  var observe = function (element, event, handler) {
-      element.addEventListener(event, handler, false)
-  }
-  var text = document.getElementById("text")
+}
+document.querySelector("#btnSave").addEventListener("click", () => {
+  const textArea = document.querySelector("#text")
+  downloadToFile(textArea.value, (document.querySelector("#title").value || "note") + ".txt", "text/plain")
+})
+var observe = function (element, event, handler) {
+  element.addEventListener(event, handler, false)
+}
+var text = document.getElementById("text")
+text.style.height = "auto"
+text.style.height = Math.max(text.scrollHeight, window.innerHeight - 108) + "px"
+if (window.localStorage) {
+  const input = document.getElementById("text")
+  input.value = localStorage.value || ""
+  input.addEventListener("input", function () {
+    localStorage.setItem("value", input.value)
     text.style.height = "auto"
-    text.style.height = Math.max(text.scrollHeight, window.innerHeight - 108)+"px"
-  if (window.localStorage) {
-    const input = document.getElementById("text")
-    input.value = localStorage.value || ""
-    input.addEventListener("input", function () {
-      localStorage.setItem("value", input.value)
-    text.style.height = "auto"
-    text.style.height = Math.max(text.scrollHeight, window.innerHeight - 108)+"px"
-    }
-    )
+    text.style.height = Math.max(text.scrollHeight, window.innerHeight - 108) + "px"
   }
-  function toggleSpellCheck() {
-    const value = document.getElementById("text").getAttribute("spellcheck")
-    document.getElementById("text").setAttribute("spellcheck", value == "false" ? "true" : "false")
-  }
-  const inputElement = document.getElementById("file")
-  inputElement.addEventListener("change", handleFiles, false)
-  function handleFiles() {
+  )
+}
+function toggleSpellCheck() {
+  const value = document.getElementById("text").getAttribute("spellcheck")
+  document.getElementById("text").setAttribute("spellcheck", value == "false" ? "true" : "false")
+}
+const inputElement = document.getElementById("file")
+inputElement.addEventListener("change", handleFiles, false)
+function handleFiles() {
     // const fileList = this.files
     const file = document.getElementById("file").files[0]
     if (file) {
@@ -48,10 +69,10 @@ const downloadToFile = (content, filename, contentType) => {
         document.querySelector("#text").value = "error reading file"
       }
     }
-  }
-  function copyToClipboard() {
-    var copyText = document.getElementById("text")
-    copyText.select()
-    copyText.setSelectionRange(0, 99999)
-    document.execCommand("copy")
-  }
+}
+function copyToClipboard() {
+  var copyText = document.getElementById("text")
+  copyText.select()
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy")
+}
