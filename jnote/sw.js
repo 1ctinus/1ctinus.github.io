@@ -1,4 +1,4 @@
-const cacheName = 'cache-v2'
+const cacheName = 'cache-v2.1'
 const resourcesToPrecache = [
 'index.html',
 'inter.woff',
