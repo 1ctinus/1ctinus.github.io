@@ -7,10 +7,10 @@
         "type": "image/png"
     }],
     "scope":".",
-      "orientation": "standalone",
+      "orientation": "portrait",
     "short_name": "JNOTE",
     "background_color": "#FFFFFF",
     "start_url": "/jnote/",
-    "display": "minimal-ui",
+    "display": "standalone",
     "theme_color": "#26ccff"
 }
