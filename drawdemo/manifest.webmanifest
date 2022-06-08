@@ -1,0 +1,16 @@
+{
+    "name": "Draw Demo",
+    "description": "Demo where you draw",
+ "icons": [{
+        "src": "icon.png",
+        "sizes": "144x144",
+        "type": "image/png"
+    }],
+    "scope":".",
+      "orientation": "portrait",
+    "short_name": "Draw Demo",
+    "background_color": "#FFFFFF",
+    "start_url": "/drawdemo/",
+    "display": "standalone",
+    "theme_color": "#800"
+}
