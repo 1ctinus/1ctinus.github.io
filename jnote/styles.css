@@ -4,11 +4,6 @@
 }
 
 @font-face {
-    font-family: icon;
-    src: url(https://raw.githubusercontent.com/Templarian/MaterialDesign-Font/master/MaterialDesignIconsDesktop.ttf) format('truetype')
-}
-
-@font-face {
     font-family: Pangolin;
     font-style: normal;
     font-weight: 400;
@@ -31,7 +26,7 @@ div {
     display: block;
     margin: 0 auto;
     /* overflow: visible; */
-    background-image: url(/notepad-left.png), url(/notepad-top.png), url(/line.png);
+    background-image: url(notepad-left.png), url(notepad-top.png), url(line.png);
     background-repeat: repeat-y, repeat-x, repeat;
     background-position: 40px 2px, 0 0, 40px 2px;
     font-size: 19px;
@@ -46,7 +41,7 @@ height: 48px
     display: block;
     margin: 0 auto;
     /* overflow: visible; */
-    background-image: url(/notepad-left.png), url(/line.png);
+    background-image: url(notepad-left.png), url(line.png);
     background-repeat: repeat-y, repeat;
     background-position: 40px 2px, 0 0, 40px 2px;
     font-size: 19px;
@@ -91,7 +86,7 @@ li a, li label {
     text-decoration: none;
     user-select: none;
     cursor: pointer;
-    font-family: icon, inter;
+    font-family: 'Material Icons', inter;
     font-size: 30px;
     text-shadow: 2px 2px #325d7e
 }

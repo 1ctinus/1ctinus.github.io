@@ -1,13 +1,16 @@
 {
     "name": "JNOTE",
+    "description": "Simple Web Text Editor",
  "icons": [{
         "src": "icon.png",
         "sizes": "144x144",
         "type": "image/png"
     }],
+    "scope":".",
+      "orientation": "portrait",
     "short_name": "JNOTE",
     "background_color": "#FFFFFF",
-    "start_url": "/",
+    "start_url": "/jnote/",
     "display": "minimal-ui",
     "theme_color": "#26ccff"
 }

@@ -1,12 +1,12 @@
 const cacheName = 'cache-v1'
 const resourcesToPrecache = [
-'/',
-'/index.html',
-'/inter.woff',
-'/notepad-left.png',
-'/notepad-top.png',
-'/line.png',
-'/notepad.js'
+'index.html',
+'inter.woff',
+'notepad-left.png',
+'notepad-top.png',
+'line.png',
+'notepad.js',
+'manifest.webmanifest'
 ]
 self.addEventListener('install', event => {
   console.log('Install event!')
