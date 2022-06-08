@@ -20,12 +20,13 @@
     <style>
       html, body {
     margin: 0;
+    touch-action: none;
 }
     </style>
 </head>
   
 <body>
-    <canvas id="canvas" style="background-color:black;display: block"></canvas>
+    <canvas id="canvas" style="background-color:black;display: block;touch-action: none"></canvas>
     <script>
     if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

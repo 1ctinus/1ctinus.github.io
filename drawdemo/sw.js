@@ -1,4 +1,4 @@
-const cacheName = 'cache-v1'
+const cacheName = 'cache-v1.1'
 const resourcesToPrecache = [
 'index.html',
 'manifest.webmanifest'
