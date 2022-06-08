@@ -60,7 +60,7 @@ color: white
     </footer>
     <template id="popup-width" >
     <fieldset>
-    <h2>Width</h2>
+    <h2>Size</h2>
     <input  type="range" id="width"  min="1" max="200">
     <button style="display:block" onclick="doneWidth()" >Done</button>
     </fieldset>
@@ -94,6 +94,7 @@ let Interval = 50;
 // wait for the content of the window element
 // to load, then performs the operations.
 // This is considered best practice.
+var dpr = window.devicePixelRatio || 1;
 if(!navigator.platform.match(/iPhone|iPod|iPad/)){
 document.getElementById("color-button").style.backgroundColor = "#111"
 document.getElementById("color-button").style.border = "#111"
@@ -155,10 +156,13 @@ const canvas = document.querySelector('#canvas');
    
 // Context for the canvas for 2 dimensional operations
 const ctx = canvas.getContext('2d');
+ctx.scale(dpr, dpr);
 // Resizes the canvas to the available size of the window.
 function resize(){
-  ctx.canvas.width = window.innerWidth;
-  ctx.canvas.height = window.innerHeight;
+  canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
+  canvas.width =( window.innerWidth * dpr) 
+  canvas.height = window.innerHeight * dpr 
 
 }
     
@@ -173,8 +177,8 @@ let paint = false;
 // an event e is triggered to the coordinates where 
 // the said event is triggered.
 function getPosition(event){
-  coord.x = (event.clientX || event.touches[0].clientX) - canvas.offsetLeft;
-  coord.y = (event.clientY || event.touches[0].clientY)- canvas.offsetTop;
+  coord.x = dpr *(event.clientX || event.touches[0].clientX) - canvas.offsetLeft;
+  coord.y = dpr * (event.clientY || event.touches[0].clientY)- canvas.offsetTop;
 }
   
 // The following functions toggle the flag to start
@@ -191,7 +195,7 @@ function sketch(event){
   if (!paint) return;
   ctx.beginPath();
     
-     ctx.lineWidth = width;
+     ctx.lineWidth = width * dpr;
    
   // Sets the end of the lines drawn
   // to a round shape.
