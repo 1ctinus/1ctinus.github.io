@@ -23,12 +23,12 @@
    <body>
       <ul>
          <li><a class="active" id="btnSave" title="Save"  class="material-icons">save</a></li>
-         <li><a onclick="document.querySelector('#text').value = ''" title="Clear">backspace</a></li>
-         <li><a onclick="toggleSpellCheck()" title="Toggle Spellcheck">spellcheck</a></li>
          <li><a onclick="(isChromium) ?bleedingInput(): document.querySelector('#file').click " title="Select File">upload_file</label></li>
          <li><a onclick="copyToClipboard()" title="Copy To Clipboard">content_copy</a></li>
 	 <li><a onclick="alert(`JNOTE v.${ver}\nWritten By James\nLicensed Under GPLv3`)" title="Software info">info</a></li>
    <li><input type="file" id="file"/></li>
+            <li><a onclick="document.querySelector('#text').value = ''" title="Clear">backspace</a></li>
+         <li><a onclick="toggleSpellCheck()" title="Toggle Spellcheck">spellcheck</a></li>
       </ul>
       <input id="title" spellcheck="true"></textarea>
       <textarea id="text" style="height:1em;" spellcheck="true"></textarea>
